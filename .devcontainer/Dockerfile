@@ -91,6 +91,7 @@ ENV MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=${MSH_MANAGED_INSTALL_ROOT}
 ## To use JupyterLab as an IDE in codespaces, executables have to be on path.
 RUN ln -fs /workspaces/${REPO_NAME}/.venv/bin/jupyter /usr/local/bin/jupyter
 RUN ln -fs /workspaces/${REPO_NAME}/.venv/bin/matlab-proxy-app /usr/local/bin/matlab-proxy-app
+RUN ln -fs /workspaces/${REPO_NAME}/.venv/bin/matlab-proxy-manager-app /usr/local/bin/matlab-proxy-manager-app
 
 USER ubuntu
 WORKDIR /home/ubuntu
