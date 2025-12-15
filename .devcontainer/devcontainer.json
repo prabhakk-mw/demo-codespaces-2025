@@ -36,5 +36,8 @@
         }
     },
     "postCreateCommand": "uv venv --clear && . .venv/bin/activate && uv pip install jupyter-matlab-proxy jupyterlab --cache-dir ./__uvcache__",
-    "waitFor": "postCreateCommand"
+    "waitFor": "postCreateCommand",
+    "hostRequirements": {
+        "cpus": 4
+    }
 }
