@@ -1,0 +1,40 @@
+{
+    "name": "MATLAB & Jupyter MATLAB Proxy",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".",
+        "args": {
+            "PYTHON_VERSION" : "3.11",
+            "NVM_VERSION" : "0.40.3",
+            "NODE_VERSION" : "24",
+            "MATLAB_RELEASE" : "R2025b",
+            "UBUNTU_VERSION" : "24.04",
+            "MATLAB_PRODUCT_LIST" : "MATLAB",
+            "REPO_NAME" : "demo-codespaces-2025"
+        }
+    },
+    "containerEnv": {
+        "NPM_CONFIG_REGISTRY": "${localEnv:NPM_CONFIG_REGISTRY}",
+        "MWI_SESSION_NAME": "DevContainer"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "MathWorks.language-matlab",
+                "ms-toolsai.jupyter"
+            ],
+            "settings": {
+                "MATLAB.signIn": true,
+                "python.terminal.activateEnvInCurrentTerminal": true,
+                "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+                "jupyter.kernels.trusted": ["${containerWorkspaceFolder}/.venv/share/jupyter/kernels/python3/kernel.json"],
+	            "chat.disableAIFeatures": true,
+                "chat.agent.enabled": false,
+                "python.venvFolders": ["${containerWorkspaceFolder}/.venv"]
+            }
+        }
+    },
+    "postCreateCommand": "uv venv --clear && . .venv/bin/activate && uv pip install jupyter-matlab-proxy jupyterlab --cache-dir ./__uvcache__",
+    "waitFor": "postCreateCommand"
+}
